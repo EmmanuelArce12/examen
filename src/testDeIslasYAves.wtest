@@ -1,0 +1,49 @@
+import aves.*
+import islas.*
+
+
+describe "Test de islas y aves" {
+	const agc = new AguiluchoColorado()
+	const alb = new Albatro()
+	const pat = new PalomaTorcaza()
+	const i1 = new Isla()
+	method initialize() {
+		i1.agregarAve(agc)
+		i1.agregarAve(alb)
+		i1.agregarAve(pat)
+		alb.irAlGym()
+	}	
+		test "fueza del aguilucho colorado" {
+		assert.equals(580, agc.fuerza())
+	}
+	test "fuerza del albatro" {
+		assert.equals(1100, alb.fuerza())
+	}
+	test "fueza de la paloma torcaza" {
+		assert.equals(700, pat.fuerza())
+	}
+	test "peso del albatro" {
+		assert.equals(4500, alb.peso())
+	}
+	test "fuerza total de la isla" {
+		assert.equals(2380, i1.fuerzaTotal())
+	}
+	
+	test "terremoto" {
+		i1.terremoto()
+		assert.equals(40, agc.velocidad())
+		assert.equals(5300, alb.peso())
+		assert.equals(500, pat.ira())
+	}
+		test "tormeta despues del terremoto" {
+		i1.terremoto()
+		i1.tormenta()
+		assert.equals(80, agc.velocidad())
+		assert.equals(640, agc.fuerza())
+		assert.equals(5300, alb.peso())
+		assert.equals(500, pat.ira())
+	} 	 
+	test "aves Debiles" {
+		assert.equals( [agc, pat], i1.avesDebiles())
+	}
+}
